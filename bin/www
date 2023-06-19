@@ -25,9 +25,12 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, () => {
+console.log('Servidor Online!')
+console.log('Disponivel em http://localhost:3000')
+})
 server.on('error', onError);
-server.on('listening', onListening);
+
 
 /**
  * Normalize a port into a number, string, or false.
@@ -81,10 +84,3 @@ function onError(error) {
  * Event listener for HTTP server "listening" event.
  */
 
-function onListening() {
-  var addr = server.address();
-  var bind = typeof addr === 'string'
-    ? 'pipe ' + addr
-    : 'port ' + addr.port;
-  debug('Servidor Online! Rodando no endereço:  ' + bind);
-}
