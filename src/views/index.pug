@@ -1,5 +1,12 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .absolute.top-0.w-full.flex.flex-row.items-center.py-5(class="bg-[var(--Primary)]")  
+    .flex.items-center.justify-center
+      img.w-20.h-20.mx-5.rounded-full(src="./images/logo-color.png", alt="Logo", widht="20", height="20")
+    .w-full.ml-10
+      a(href="/" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Início 
+      a(href="/carros/new" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Cadastrar veículo 
+      a(href="/carros/list" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Listar veículos
+  .w-full.flex.flex-col.items-center.justify-center.text-center(class="bg-[var(--Background)]")
+    img.w-96.h-96(src="./images/logo-no-background.png", alt="Logo para background")    

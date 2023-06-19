@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  .flex.flex-col.items-center.justify-center.my-4.text-white
+    #root.flex.flex-col.w-full.h-full.max-h-96.overflow-auto 
+      table#myTable
+        thead
+          tr
+            th.th-title Modelo
+            th.th-title Marca
+            th.th-title Valor
+            th.th-title A&ccedil;&otilde;es
+        tbody
+          tr
+            each carro in carrosList        
+              td.table-td#modelo= carro
+  a.font-bold.mt-5.text-white.text-center(href='/' class='hover:opacity-70') Voltar

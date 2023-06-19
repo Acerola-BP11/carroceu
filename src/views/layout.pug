@@ -3,5 +3,8 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
-  body
-    block content
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js')
+    script(src='https://cdn.tailwindcss.com')
+        
+  body(class='w-screen h-screen flex flex-col items-center justify-center bg-[var(--Background)]')
+    block content      
