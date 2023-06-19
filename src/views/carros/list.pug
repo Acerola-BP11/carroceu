@@ -61,7 +61,7 @@ block content
             td(id='marca-' + carro.id)= carro.marca
             td(id='valor-' + carro.id)= carro.valor
             td
-              button(type="button", onclick="editar(" + carro.id + ")")
+              button(class="mr-5", type="button", onclick="editar(" + carro.id + ")")
                 img(src="../icons/edit-2.svg", alt="Editar") 
               button(type="submit", onclick="deletar(" + carro.id + ")")   
                 img(src="../icons/trash-2.svg", alt="Deletar")        
@@ -80,5 +80,5 @@ block content
           input#marca.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='marca' placeholder='Digite a marca' required='')
         .flex.flex-col.mb-6.w-full
           label(for="valor", class="text-[var(--Secondary)] font-bold text-lg") Valor 
-          input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='number' name='valor' placeholder='Digite valor' required='')
+          input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='number' name='valor' placeholder='Digite valor' required='' step="0.01")
         button.w-full.p-2.font-bold.text-center.text-lg.rounded-lg.duration-150(type='submit' class='bg-[var(--Primary)] text-[var(--Accent)] font-bold hover:opacity-70') Editar
