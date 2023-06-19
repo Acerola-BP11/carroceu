@@ -2,8 +2,7 @@ const Carro = require('../models/Carro')
 
 module.exports = {
     create: async (req, res) => {
-        await Carro.create(req.body)
-        return res.redirect('/carros/list')
+        await Carro.create(req.body)        
     },
 
     form:(_, res) => res.render('carros/form'),
