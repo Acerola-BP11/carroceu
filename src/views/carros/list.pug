@@ -3,32 +3,28 @@ extends ../layout
 block content
   script.
     function deletar(id) {
-      console.log(id)      
+      console.log(id);
 
       let formData = {
         id: id
-      }
+      };
 
-      console.log(formData)      
+      console.log(formData);
 
       $.ajax({
         type: 'POST',
         url: '/carros/delete',
         data: formData
-      })
+      });
     }
     
     function editar(id) {      
       const modal = document.getElementById("myModal");
       modal.style.display = "block";    
 
-      let table = document.getElementById('myTable');       
-      let lenght = table.rows[0].cells.lenght;            
-      let content = table.rows[id].cells;  
-            
-      const modelo = content[0].innerHTML;
-      const marca = content[1].innerHTML;
-      const valor = content[2].innerHTML;
+      const modelo = document.getElementById('modelo-' + id).innerHTML;
+      const marca = document.getElementById('marca-' + id).innerHTML;
+      const valor = document.getElementById('valor-' + id).innerHTML;
 
       document.getElementById('id').value = id;
       document.getElementById('modelo').value = modelo;              
@@ -52,20 +48,22 @@ block content
     table#myTable
       thead
         tr(class="bg-[var(--Primary)]")
+          th.th-title ID
           th.th-title Modelo
           th.th-title Marca
           th.th-title Valor
-          th.th-title A&ccedil;&otilde;es
+          th.th-title Ações
       tbody
         each carro in carrosList        
           tr
-            td= carro.modelo    
-            td= carro.marca    
-            td= carro.valor 
+            td= carro.id
+            td(id='modelo-' + carro.id)= carro.modelo
+            td(id='marca-' + carro.id)= carro.marca
+            td(id='valor-' + carro.id)= carro.valor
             td
-              button(type="button" id=`${carro.id}` onclick=`editar(${carro.id})` class="mr-5")
+              button(type="button", onclick="editar(" + carro.id + ")")
                 img(src="../icons/edit-2.svg", alt="Editar") 
-              button(type="submit" id=`${carro.id}` onclick=`deletar(${carro.id})`)   
+              button(type="submit", onclick="deletar(" + carro.id + ")")   
                 img(src="../icons/trash-2.svg", alt="Deletar")        
   
   #myModal.modal
