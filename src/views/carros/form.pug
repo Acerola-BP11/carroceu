@@ -1,0 +1,44 @@
+extends ../layout
+
+block content
+  script.
+    $(document).ready(function() {
+      $("form").submit(function() {
+      var formData = {
+        modelo: $("#modelo").val(),
+        marca: $("#marca").val(),
+        valor: $("#valor").val(),
+      }
+
+      $.ajax({
+        type: 'POST',
+        url: '/carros/new',
+        data: formData,
+        success: function(data) {
+          $('#root').html(data)
+        }
+      })
+
+      event.preventDefault();
+      })
+    })
+  
+  .absolute.top-0.w-full.flex.flex-row.items-center.py-5(class="bg-[var(--Primary)]")  
+    .flex.items-center.justify-center
+      img.w-20.h-20.mx-5.rounded-full(src="../images/logo-color.png", alt="Logo", widht="20", height="20")
+    .w-full.ml-10
+      a(href="/" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Início 
+      a(href="/carros/new" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Cadastrar veículo 
+      a(href="/carros/list" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Listar veículos
+  form.w-full.max-w-xl.flex.flex-col.items-center.justify-center.p-10.mt-16
+    .flex.flex-col.mb-6.w-full
+      label(for="modelo", class="text-[var(--Secondary)] font-bold text-lg") Modelo 
+      input#modelo.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='modelo' placeholder='Digite o modelo' value=modelo required='')          
+    .flex.flex-col.mb-6.w-full
+      label(for="marca", class="text-[var(--Secondary)] font-bold text-lg") Marca 
+      input#marca.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='marca' placeholder='Digite a marca' value=marca required='')
+    .flex.flex-col.mb-6.w-full
+      label(for="valor", class="text-[var(--Secondary)] font-bold text-lg") Valor 
+      input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='valor' placeholder='Digite valor' value=valor required='')
+    button.w-full.p-2.font-bold.text-center.text-lg.rounded-lg.duration-150(type='submit' class='bg-[var(--Primary)] text-[var(--Accent)] font-bold hover:opacity-70') Cadastrar
+    a.font-bold.mt-5.text-center(href='/' class='text-[var(--Accent)] font-bold hover:opacity-70') Voltar
