@@ -12,6 +12,7 @@
     "http-errors": "~1.6.3",
     "lodash": "^4.17.21",
     "morgan": "~1.9.1",
+    "nodemon": "^2.0.22",
     "pug": "^3.0.2",
     "sequelize": "^6.32.1",
     "sqlite3": "^5.1.6"
