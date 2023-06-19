@@ -4,17 +4,17 @@ module.exports = {
     validate: async (req, res, next) => {
         const body = await req.body
         if(isNil(body.modelo) || isNil(body.marca) || isNil(body.valor)){
-            await res.send('Não existem valores enviados')
-        }else if(isNumber(!!body.valor)){
-            await res.send('O valor enviado não é um numero valido')
+            await res.sendStatus(200, 'Não foram enviados os valores corretos')
+        }else if(!!isNumber(body.valor)){
+            await res.sendStatus(200, 'O valor não é um numero')
         }else{
-            next()
+            await next()
         }
     },
     validateid: async (req, res, next) => {
         const body = await req.body
         if(isNil(body.id)){
-            res.send('ID invalido')
+            await res.sendStatus(200, 'ID Invalido')
         }else{
             next()
         }

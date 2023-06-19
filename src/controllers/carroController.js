@@ -23,5 +23,17 @@ module.exports = {
         })
         await carro.save()
         return res.redirect('/carros/list')
+    },
+    delete: async (req, res) => {
+        const id = req.body.id
+        deleteCar(id)
     }
+}
+
+const deleteCar = async (id) => {
+    await Carro.destroy({
+        where: {
+            id: id
+        }
+    })
 }
