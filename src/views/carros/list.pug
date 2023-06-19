@@ -12,18 +12,16 @@ block content
 
       let table = document.getElementById('myTable');       
       let lenght = table.rows[0].cells.lenght;            
-      let content = table.rows[id+1].cells;  
+      let content = table.rows[id].cells;  
 
       const modelo = content[0].innerHTML;
       const marca = content[1].innerHTML;
       const valor = content[2].innerHTML;
 
-      console.log(document.getElementById('modelo'))
-
       document.getElementById('id').value = id;
       document.getElementById('modelo').value = modelo;              
       document.getElementById('marca').value = marca;       
-      document.getElementById('valor').value = valor;       
+      document.getElementById('valor').value = valor; 
     }
 
     function closeModal() {
@@ -38,7 +36,7 @@ block content
       a(href="/" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Início 
       a(href="/carros/new" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Cadastrar veículo 
       a(href="/carros/list" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Listar veículos
-  .flex.w-full.px-10.absolute.top-40
+  form.flex.w-full.px-10.absolute.top-40(action="/carros/delete" method="POST")
     table#myTable
       thead
         tr(class="bg-[var(--Primary)]")
@@ -49,13 +47,14 @@ block content
       tbody
         each carro in carrosList        
           tr
+            input(class="hidden" type="number" id="id" value=`${carro.id}`)
             td= carro.modelo    
             td= carro.marca    
             td= carro.valor 
             td
               button(type="button" id=`${carro.id}` onclick=`editar(${carro.id})` class="mr-5")
                 img(src="../icons/edit-2.svg", alt="Editar") 
-              button(type="button" id=`${carro.id}` onclick=`deletar(${carro.id})`)   
+              button(type="submit" id=`${carro.id}`)   
                 img(src="../icons/trash-2.svg", alt="Deletar")        
   
   #myModal.modal

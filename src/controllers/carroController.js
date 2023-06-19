@@ -15,18 +15,22 @@ module.exports = {
     
     edit: async (req, res) => {
         const data = req.body
-        const carro = await Carro.find(data.id)
+
+        console.log(data)
+        let carro = await Carro.findByPk(data.id)        
         carro = await carro.set({
             modelo: data.modelo,
             marca: data.marca,
             valor: data.valor
         })
         await carro.save()
+        
         return res.redirect('/carros/list')
     },
     delete: async (req, res) => {
-        const id = req.body.id
-        deleteCar(id)
+        const id = req.body.id        
+        await deleteCar(id)
+        return res.redirect('/carros/list')
     }
 }
 

@@ -8,6 +8,7 @@ module.exports = {
         }else if(!!isNumber(body.valor)){
             await res.sendStatus(200, 'O valor não é um numero')
         }else{
+            console.log('foi')
             await next()
         }
     },
@@ -16,7 +17,7 @@ module.exports = {
         if(isNil(body.id)){
             await res.sendStatus(200, 'ID Invalido')
         }else{
-            next()
+            await next()
         }
     }
 }
