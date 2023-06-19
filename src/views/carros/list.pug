@@ -1,17 +1,38 @@
 extends ../layout
 
 block content
-  .flex.flex-col.items-center.justify-center.my-4.text-white
-    #root.flex.flex-col.w-full.h-full.max-h-96.overflow-auto 
-      table#myTable
-        thead
+  script.
+    function delete(id) {
+      console.log(id)
+    }
+
+    function edit(id) {
+      console.log(id)
+    }
+    
+  .absolute.top-0.w-full.flex.flex-row.items-center.py-5(class="bg-[var(--Primary)]")  
+    .flex.items-center.justify-center
+      img.w-20.h-20.mx-5.rounded-full(src="../images/logo-color.png", alt="Logo", widht="20", height="20")
+    .w-full.ml-10
+      a(href="/" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Início 
+      a(href="/carros/new" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Cadastrar veículo 
+      a(href="/carros/list" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Listar veículos
+  .flex.w-full.px-10.absolute.top-40
+    table
+      thead
+        tr(class="bg-[var(--Primary)]")
+          th.th-title Modelo
+          th.th-title Marca
+          th.th-title Valor
+          th.th-title A&ccedil;&otilde;es
+      tbody
+        each carro in carrosList        
           tr
-            th.th-title Modelo
-            th.th-title Marca
-            th.th-title Valor
-            th.th-title A&ccedil;&otilde;es
-        tbody
-          tr
-            each carro in carrosList        
-              td.table-td#modelo= carro
-  a.font-bold.mt-5.text-white.text-center(href='/' class='hover:opacity-70') Voltar
+            td#modelo= carro.modelo    
+            td#marca= carro.marca    
+            td#valor= carro.valor 
+            td#actions
+              button(type="button" id=`${carro.id}` onclick=`edit(${carro.id})` class="mr-5")
+                img(src="../icons/edit-2.svg", alt="Editar") 
+              button(type="button" id=`${carro.id}` onclick=`delete(${carro.id})`)   
+                img(src="../icons/trash-2.svg", alt="Deletar")        
