@@ -3,17 +3,29 @@ extends ../layout
 block content
   script.
     function deletar(id) {
-      console.log(id)
+      console.log(id)      
+
+      let formData = {
+        id: id
+      }
+
+      console.log(formData)      
+
+      $.ajax({
+        type: 'POST',
+        url: '/carros/delete',
+        data: formData
+      })
     }
     
-    function editar(id) {
+    function editar(id) {      
       const modal = document.getElementById("myModal");
       modal.style.display = "block";    
 
       let table = document.getElementById('myTable');       
       let lenght = table.rows[0].cells.lenght;            
       let content = table.rows[id].cells;  
-
+            
       const modelo = content[0].innerHTML;
       const marca = content[1].innerHTML;
       const valor = content[2].innerHTML;
@@ -36,7 +48,7 @@ block content
       a(href="/" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Início 
       a(href="/carros/new" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Cadastrar veículo 
       a(href="/carros/list" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Listar veículos
-  form.flex.w-full.px-10.absolute.top-40(action="/carros/delete" method="POST")
+  form.flex.w-full.px-10.absolute.top-40
     table#myTable
       thead
         tr(class="bg-[var(--Primary)]")
@@ -47,14 +59,13 @@ block content
       tbody
         each carro in carrosList        
           tr
-            input(class="hidden" type="number" id="id" value=`${carro.id}`)
             td= carro.modelo    
             td= carro.marca    
             td= carro.valor 
             td
               button(type="button" id=`${carro.id}` onclick=`editar(${carro.id})` class="mr-5")
                 img(src="../icons/edit-2.svg", alt="Editar") 
-              button(type="submit" id=`${carro.id}`)   
+              button(type="submit" id=`${carro.id}` onclick=`deletar(${carro.id})`)   
                 img(src="../icons/trash-2.svg", alt="Deletar")        
   
   #myModal.modal
@@ -71,5 +82,5 @@ block content
           input#marca.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='marca' placeholder='Digite a marca' required='')
         .flex.flex-col.mb-6.w-full
           label(for="valor", class="text-[var(--Secondary)] font-bold text-lg") Valor 
-          input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='valor' placeholder='Digite valor' required='')
+          input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='number' name='valor' placeholder='Digite valor' required='')
         button.w-full.p-2.font-bold.text-center.text-lg.rounded-lg.duration-150(type='submit' class='bg-[var(--Primary)] text-[var(--Accent)] font-bold hover:opacity-70') Editar
