@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-form(action="/carros/new", method="post")
-    input(type="text", name="modelo", id="modelo")
-    input(type="text", name="marca", id="marca") 
-    input(type="number", name="valor", id="valor") 
-    input(type="submit", value="Mandar")
-=======
 extends ../layout
 
 block content
@@ -22,7 +15,7 @@ block content
         url: '/carros/new',
         data: formData,
         success: function(data) {
-          $('#root').html(data)
+          window.location.href = '/carros/list';
         }
       })
 
@@ -49,4 +42,3 @@ block content
       input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='valor' placeholder='Digite valor' value=valor required='')
     button.w-full.p-2.font-bold.text-center.text-lg.rounded-lg.duration-150(type='submit' class='bg-[var(--Primary)] text-[var(--Accent)] font-bold hover:opacity-70') Cadastrar
     a.font-bold.mt-5.text-center(href='/' class='text-[var(--Accent)] font-bold hover:opacity-70') Voltar
->>>>>>> 9539fcfa5a87a6b64a9c15e8631c9627deb6fa93
