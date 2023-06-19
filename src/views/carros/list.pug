@@ -2,12 +2,33 @@ extends ../layout
 
 block content
   script.
-    function delete(id) {
+    function deletar(id) {
       console.log(id)
     }
+    
+    function editar(id) {
+      const modal = document.getElementById("myModal");
+      modal.style.display = "block";    
 
-    function edit(id) {
-      console.log(id)
+      let table = document.getElementById('myTable');       
+      let lenght = table.rows[0].cells.lenght;            
+      let content = table.rows[id+1].cells;  
+
+      const modelo = content[0].innerHTML;
+      const marca = content[1].innerHTML;
+      const valor = content[2].innerHTML;
+
+      console.log(document.getElementById('modelo'))
+
+      document.getElementById('id').value = id;
+      document.getElementById('modelo').value = modelo;              
+      document.getElementById('marca').value = marca;       
+      document.getElementById('valor').value = valor;       
+    }
+
+    function closeModal() {
+      const modal = document.getElementById("myModal");
+      modal.style.display = "none";
     }
     
   .absolute.top-0.w-full.flex.flex-row.items-center.py-5(class="bg-[var(--Primary)]")  
@@ -18,7 +39,7 @@ block content
       a(href="/carros/new" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Cadastrar veículo 
       a(href="/carros/list" class="text-[var(--Accent)] font-bold mr-5 border-l border-solid border-l-[var(--Accent)] pl-5 hover:opacity-80") Listar veículos
   .flex.w-full.px-10.absolute.top-40
-    table
+    table#myTable
       thead
         tr(class="bg-[var(--Primary)]")
           th.th-title Modelo
@@ -28,11 +49,28 @@ block content
       tbody
         each carro in carrosList        
           tr
-            td#modelo= carro.modelo    
-            td#marca= carro.marca    
-            td#valor= carro.valor 
-            td#actions
-              button(type="button" id=`${carro.id}` onclick=`edit(${carro.id})` class="mr-5")
+            td= carro.modelo    
+            td= carro.marca    
+            td= carro.valor 
+            td
+              button(type="button" id=`${carro.id}` onclick=`editar(${carro.id})` class="mr-5")
                 img(src="../icons/edit-2.svg", alt="Editar") 
-              button(type="button" id=`${carro.id}` onclick=`delete(${carro.id})`)   
+              button(type="button" id=`${carro.id}` onclick=`deletar(${carro.id})`)   
                 img(src="../icons/trash-2.svg", alt="Deletar")        
+  
+  #myModal.modal
+    .modal-content
+      span.close(onclick="closeModal()") ×
+
+      form.w-full.max-w-xl.flex.flex-col.items-center.justify-center.p-10.mt-16(action="/carros/edit" method="POST")
+        input#id.hidden(type='number' name="id")          
+        .flex.flex-col.mb-6.w-full
+          label(for="modelo", class="text-[var(--Secondary)] font-bold text-lg") Modelo 
+          input#modelo.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='modelo' placeholder='Digite o modelo' required='')          
+        .flex.flex-col.mb-6.w-full
+          label(for="marca", class="text-[var(--Secondary)] font-bold text-lg") Marca 
+          input#marca.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='marca' placeholder='Digite a marca' required='')
+        .flex.flex-col.mb-6.w-full
+          label(for="valor", class="text-[var(--Secondary)] font-bold text-lg") Valor 
+          input#valor.p-5.border-b.border-b-solid(class="border-b-[var(--Secondary)]" type='text' name='valor' placeholder='Digite valor' required='')
+        button.w-full.p-2.font-bold.text-center.text-lg.rounded-lg.duration-150(type='submit' class='bg-[var(--Primary)] text-[var(--Accent)] font-bold hover:opacity-70') Editar
