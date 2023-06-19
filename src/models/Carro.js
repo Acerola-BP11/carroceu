@@ -1,4 +1,5 @@
 const { DataTypes } = require("sequelize")
+const sequelize = require('../sequelize')
 
 const Carro = sequelize.define('Carro', {
     id:{
