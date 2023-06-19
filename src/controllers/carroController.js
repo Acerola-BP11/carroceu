@@ -1,10 +1,9 @@
 const Carro = require('../models/Carro')
-const lodash = require('lodash')
 
 module.exports = {
     create: async (req, res) => {
         await Carro.create(req.body)
-        return res.redirect('/carros')
+        return res.redirect('/carros/list')
     },
     form:(_, res) => res.render('carros/form'),
     list: async (_, res) => {
@@ -20,5 +19,6 @@ module.exports = {
             valor: data.valor
         })
         await carro.save()
+        return res.redirect('/carros/list')
     }
 }

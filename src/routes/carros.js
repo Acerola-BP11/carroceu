@@ -9,4 +9,5 @@ router.get('/new', carroController.form);
 
 // Posts
 router.post('/new', carroMiddleware.validate, carroController.create)
+router.post('/edit', carroMiddleware.validate, carroMiddleware.validateid, carroController.edit)
 module.exports = router;
