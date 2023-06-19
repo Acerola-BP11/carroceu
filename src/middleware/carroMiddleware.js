@@ -1,23 +1,24 @@
-const { isNumber, isNil } = require("lodash")
+const { isNumber, isNil } = require("lodash");
 
 module.exports = {
-    validate: async (req, res, next) => {
-        const body = await req.body
-        if(isNil(body.modelo) || isNil(body.marca) || isNil(body.valor)){
-            await res.sendStatus(200, 'Não foram enviados os valores corretos')
-        }else if(!!isNumber(body.valor)){
-            await res.sendStatus(200, 'O valor não é um numero')
-        }else{
-            console.log('foi')
-            await next()
-        }
-    },
-    validateid: async (req, res, next) => {
-        const body = await req.body
-        if(isNil(body.id)){
-            await res.sendStatus(200, 'ID Invalido')
-        }else{
-            await next()
-        }
+  validate: (req, res, next) => {
+    const body = req.body;
+    if (isNil(body.modelo) || isNil(body.marca) || isNil(body.valor)) {
+       return res.render('error', { message: 'Os valores enviados são inválidos' });
+    } else if (!isNumber(body.valor)) {
+        return res.render('error', { message: 'O valor não é um número' });
+    } else {
+        console.log(typeof(body.valor))
+        next();
     }
-}
+  },
+
+  validateid: (req, res, next) => {
+    const body = req.body;
+    if (isNil(body.id)) {
+      return res.status(200).send('ID inválido');
+    } else {
+      next();
+    }
+  }
+};
