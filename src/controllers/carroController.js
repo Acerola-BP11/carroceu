@@ -2,7 +2,8 @@ const Carro = require('../models/Carro')
 
 module.exports = {
     create: async (req, res) => {
-        await Carro.create(req.body)        
+        await Carro.create(req.body)
+        return res.redirect('/carros/list')
     },
 
     form:(_, res) => res.render('carros/form'),
@@ -22,5 +23,17 @@ module.exports = {
         })
         await carro.save()
         return res.redirect('/carros/list')
+    },
+    delete: async (req, res) => {
+        const id = req.body.id
+        deleteCar(id)
     }
+}
+
+const deleteCar = async (id) => {
+    await Carro.destroy({
+        where: {
+            id: id
+        }
+    })
 }

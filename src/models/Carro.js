@@ -16,7 +16,7 @@ const Carro = sequelize.define('Carro', {
         allowNull: false
     },
     valor:{
-        type: DataTypes.DECIMAL(2),
+        type: DataTypes.DOUBLE.UNSIGNED,
         allowNull: false
     }
 })
